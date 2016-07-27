@@ -49,22 +49,6 @@
     }
   },
   {
-    "model": "encoding.answer",
-    "pk": 1,
-    "fields": {
-      "answer": "Answer 1",
-      "gameset": 1
-    }
-  },
-  {
-    "model": "encoding.answer",
-    "pk": 2,
-    "fields": {
-      "answer": "Answer 2",
-      "gameset": 1
-    }
-  },
-  {
     "model": "encoding.result",
     "pk": 1,
     "fields": {
