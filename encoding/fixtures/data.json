@@ -1,0 +1,85 @@
+[
+  {
+    "model": "encoding.team",
+    "pk": 1,
+    "fields": {
+      "name": "Team 1"
+    }
+  },
+  {
+    "model": "encoding.team",
+    "pk": 2,
+    "fields": {
+      "name": "Team 2"
+    }
+  },
+  {
+    "model": "encoding.category",
+    "pk": 1,
+    "fields": {
+      "label": "Category 1"
+    }
+  },
+  {
+    "model": "encoding.category",
+    "pk": 2,
+    "fields": {
+      "label": "Category 2"
+    }
+  },
+  {
+    "model": "encoding.game",
+    "pk": 1,
+    "fields": {
+      "name": "Game 1"
+    }
+  },
+  {
+    "model": "encoding.game",
+    "pk": 2,
+    "fields": {
+      "name": "Game 2"
+    }
+  },
+  {
+    "model": "encoding.gameset",
+    "pk": 1,
+    "fields": {
+      "category": 1
+    }
+  },
+  {
+    "model": "encoding.answer",
+    "pk": 1,
+    "fields": {
+      "answer": "Answer 1",
+      "gameset": 1
+    }
+  },
+  {
+    "model": "encoding.answer",
+    "pk": 2,
+    "fields": {
+      "answer": "Answer 2",
+      "gameset": 1
+    }
+  },
+  {
+    "model": "encoding.result",
+    "pk": 1,
+    "fields": {
+      "gameset": 1,
+      "result": 10,
+      "team": 1
+    }
+  },
+  {
+    "model": "encoding.result",
+    "pk": 1,
+    "fields": {
+      "gameset": 1,
+      "result": 9,
+      "team": 2
+    }
+  }
+]
