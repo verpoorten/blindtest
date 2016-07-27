@@ -10,8 +10,20 @@
       <div class="panel panel-default">
         <div class="panel-heading"></div>
         <div class="panel-body">
-
-
+            {{game.name}}
+            <br>
+            <table>
+            {% for gameset in gamesets%}
+                <tr><td>
+                {{gameset.category}}
+                <table>
+                <tr><td>{{gameset.playlist}}</td></tr>
+                <tr><td>&nbsp;</td></tr>
+                </table>
+                </td>
+                </tr>
+            {% endfor %}
+            </table>
           </div>
         </div>
 

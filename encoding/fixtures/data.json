@@ -31,14 +31,16 @@
     "model": "encoding.game",
     "pk": 1,
     "fields": {
-      "name": "Game 1"
+      "name": "Game 1",
+      "open_status": "OPEN"
     }
   },
   {
     "model": "encoding.game",
     "pk": 2,
     "fields": {
-      "name": "Game 2"
+      "name": "Game 2",
+      "open_status": "CLOSE"
     }
   },
   {
