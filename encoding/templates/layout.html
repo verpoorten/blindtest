@@ -3,8 +3,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Notre bibliothèque</title>
-
+        <title>Blindtest</title>
         <meta name="apple-mobile-web-app-capable" content="yes" />
 		    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -14,7 +13,6 @@
         <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
         <link rel="stylesheet" href="{% static "css/custom.css" %}">
         <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-
         {% block style %}
         {% endblock %}
         <style>
@@ -34,7 +32,6 @@
             </button>
             <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/play-music.png' %}" style="margin-top: -10px;"></a>
           </div>
-
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -52,7 +49,7 @@
             <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
             {% block breadcrumb %}
             {% endblock %}
-<br/>
+        <br/>
         {% block content %}
         {% endblock %}
       </div>
@@ -81,6 +78,9 @@
             alert('Audio Stop Successfully');
             clearInterval(k);
         }
+        $(document).ready(function () {
+
+        });
       </script>
       {% endblock %}
     </body>

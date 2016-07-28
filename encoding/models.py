@@ -2,9 +2,37 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+class Game(models.Model):
+    OPEN_STATUS = (
+        ('CLOSE', _('close')),
+        ('OPEN', _('open'))
+    )
+    name = models.CharField(max_length = 100,blank = False, null = False)
+    description = models.TextField(blank = True, null = True)
+    open_status = models.CharField(max_length=20, choices=OPEN_STATUS, default='CLOSE', blank=False, null=False)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def teams(self):
+        return Team.objects.filter(game=self)
+
+
+    @staticmethod
+    def find_by_id(game_id):
+        return Game.objects.get(pk=game_id)
+
+    @staticmethod
+    def find_open():
+        games= Game.objects.filter(open_status='OPEN')
+        if games:
+            return games[0]
+
 
 class Team(models.Model):
     name = models.CharField(max_length = 100, blank = False, null = False)
+    game  = models.ForeignKey(Game, blank = False, null = False)
 
     def __str__(self):
         return self.name
@@ -15,23 +43,6 @@ class Category(models.Model):
     def __str__(self):
         return self.label
 
-class Game(models.Model):
-    OPEN_STATUS = (
-        ('CLOSE', _('close')),
-        ('OPEN', _('open'))
-    )
-    name = models.CharField(max_length = 100,blank = False, null = False)
-    open_status = models.CharField(max_length=20, choices=OPEN_STATUS, default='CLOSE', blank=False, null=False)
-
-    def __str__(self):
-        return self.name
-
-    @staticmethod
-    def find_open():
-        games= Game.objects.filter(open_status='OPEN')
-        if games:
-            print(games[0].name)
-            return games[0]
 
 class Gameset(models.Model):
     game  = models.ForeignKey(Game)
@@ -39,6 +50,9 @@ class Gameset(models.Model):
 
     def __str__(self):
         return self.game.name
+    @staticmethod
+    def find_by_id(a_gameset_id):
+        return Gameset.objects.get(pk=a_gameset_id)
 
     @staticmethod
     def find_by_game(a_game):
@@ -46,18 +60,28 @@ class Gameset(models.Model):
 
     @property
     def playlist(self):
-        print('playlist')
-        playlists = Playlist.objects.filter(gameset=self)
-        if playlists:
-            for playlist in playlists:
-                print(playlist.song.title)
-            return playlists
-        return None
+        return Playlist.objects.filter(gameset=self)
+
+    @property
+    def results(self):
+        return Result.objects.filter(gameset=self)
+
 
 class Result(models.Model):
     score = models.IntegerField(default=0)
     gameset  = models.ForeignKey(Gameset, blank = False, null = False)
     team  = models.ForeignKey(Team, blank = False, null = False)
+
+    @staticmethod
+    def find_by_id(an_id):
+        return Result.objects.get(pk=an_id)
+
+    @staticmethod
+    def find_by_game(an_game):
+        return Result.objects.filter(gameset__game=an_game)
+    @staticmethod
+    def find_by_team_gameset(a_team, a_gameset):
+        return Result.objects.filter(team=a_team,gameset=a_gameset)
 
 class Song(models.Model):
     interpreter = models.CharField(max_length=255)

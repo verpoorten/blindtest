@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+
+  <table class="table table-striped">
+
+  {%for res in total_results %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{res.team.name}}</td>
+      <td>{{res.result}}</td>
+      <td></td>
+    </tr>
+
+  {%endfor%}
+ </table>
+
+
+
+{% endblock %}

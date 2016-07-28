@@ -3,44 +3,66 @@
 {% load i18n %}
 
 {% block content %}
-
-
 <div class ="row">
       <div class="panel panel-default">
         <div class="panel-heading"></div>
         <div class="panel-body">
+            <input type="hidden"
+                   value="{{gameset.id | default_if_none:''}}"
+                   id="gameset_active_id">
             <ul class="nav nav-tabs">
-              <li class="active"><a id="lnk_gameset_{{gameset.id}}" data-toggle="tab" href="#tab_game">{{game.name}}</a></li>
-              {% for gameset in gamesets%}
-              <li><a data-toggle="tab" href="#tab_gameset_{{gameset.id}}" id="lnk_gameset_{{gameset.id}}">{{gameset.category}}</a></li>
+              <li class="{%if gameset %}{%else%}active{%endif%}"
+                  id="lnk_home"><a id="lnk_gameset_{{gameset.id}}" href="{% url 'change_tab_home' game.id %}">{{game.name}}</a></li>
+              {% for gs in gamesets%}
+              <li class="{% if gameset.id == gs.id %}active{%endif%}" id="lnk_gameset_{{gs.id}}"><a href="{% url 'change_tab' gs.id%}"
+                  id="lnk_gameset_{{gs.id}}">{{gs.category}}</a></li>
               {% endfor %}
             </ul>
             <div class="tab-content">
-              <div id="tab_game" class="tab-pane fade in active">
-                {{game.name}} {% trans 'description'%}
+              <div id="tab_game"
+                   class="tab-pane fade {%if gameset %}{%else%}in active{%endif%}">
+                <br><br>
+                {% if game.description %}
+                {{game.description | default_if_none:''}}
+                {% endif %}
+                <br>
+                {% include "score.html" %}
               </div>
-              {% for gameset in gamesets%}
-                <div id="tab_gameset_{{gameset.id}}" class="tab-pane fade">
-                  {% if gameset.playlist%}
-                  <table class="table">
-                  {% for p in gameset.playlist%}
-                  <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                      <audio id="aud_{{p.song.id}}" controls >
-                          <source src="{{p.song.audio_file.url}}" type="audio/mpeg">
-                      </audio>
-                    </td>
-                  </tr>
-                  {% endfor %}
+              {% for gs in gamesets%}
+                <div id="tab_gameset_{{gameset.id}}"
+                     class="tab-pane fade {% if gameset.id == gs.id %}in active{%endif%}">
+                  {% if gs.playlist%}
+                  <table class="table table-striped">
+                    {% for p in gs.playlist%}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>
+                        <audio id="aud_{{p.song.id}}" controls >
+                            <source src="{{p.song.audio_file.url}}"
+                            type="audio/mpeg">
+                        </audio>
+                        <input type="hidden"
+                               id="aud_time_{{p.song.id}}"
+                               value="{{p.song.time}}">
+                      </td>
+                    </tr>
+                    {% endfor %}
                   </table>
                   {%endif%}
+                  {% if gs.results%}
+                    <table class="table table-hover"><tr>
+                    {% for result in gs.results%}
+                      <td><a href="{% url 'result_encoding' result.id %}">{{result.team}} {%if result.score %}-{{result.score}} points{%else%} {% trans 'not_encoded_yet' %}{%endif%}</a></td>
+                    {% endfor %}
+                  </tr>
+
+                  </table>
+                  {% endif %}
                 </div>
                 {% endfor %}
             </div>
+
             <br>
-
-
           </div>
         </div>
 </div>

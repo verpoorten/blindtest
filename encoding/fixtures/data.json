@@ -1,18 +1,5 @@
 [
-  {
-    "model": "encoding.team",
-    "pk": 1,
-    "fields": {
-      "name": "Team 1"
-    }
-  },
-  {
-    "model": "encoding.team",
-    "pk": 2,
-    "fields": {
-      "name": "Team 2"
-    }
-  },
+
   {
     "model": "encoding.category",
     "pk": 1,
@@ -41,6 +28,22 @@
     "fields": {
       "name": "Game 2",
       "open_status": "CLOSE"
+    }
+  },
+  {
+    "model": "encoding.team",
+    "pk": 1,
+    "fields": {
+      "name": "Team 1",
+      "game": 1
+    }
+  },
+  {
+    "model": "encoding.team",
+    "pk": 2,
+    "fields": {
+      "name": "Team 2",
+      "game": 1
     }
   },
   {

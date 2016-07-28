@@ -1,2 +1,11 @@
 msgid "description"
 msgstr "description"
+
+msgid "not_encoded_yet"
+msgstr "Pas encodé"
+
+msgid "save"
+msgstr "Valider"
+
+msgid "view_results"
+msgstr "Voir tous les resultats"
