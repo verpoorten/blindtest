@@ -46,9 +46,13 @@ class Gameset(models.Model):
 
     @property
     def playlist(self):
+        print('playlist')
         playlists = Playlist.objects.filter(gameset=self)
         if playlists:
-            return playlists[0]
+            for playlist in playlists:
+                print(playlist.song.title)
+            return playlists
+        return None
 
 class Result(models.Model):
     score = models.IntegerField(default=0)
@@ -58,7 +62,7 @@ class Result(models.Model):
 class Song(models.Model):
     interpreter = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    audio_file = models.FileField()
+    audio_file = models.FileField(upload_to='songs/')
     play_time = models.IntegerField(default=5) # In seconds
 
     def __str__(self):

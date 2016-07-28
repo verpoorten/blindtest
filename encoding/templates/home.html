@@ -1,33 +1,48 @@
 {% extends "layout.html" %}
 {% load staticfiles %}
+{% load i18n %}
+
 {% block content %}
 
-
-<br/>
-<br/>
 
 <div class ="row">
       <div class="panel panel-default">
         <div class="panel-heading"></div>
         <div class="panel-body">
-            {{game.name}}
+            <ul class="nav nav-tabs">
+              <li class="active"><a id="lnk_gameset_{{gameset.id}}" data-toggle="tab" href="#tab_game">{{game.name}}</a></li>
+              {% for gameset in gamesets%}
+              <li><a data-toggle="tab" href="#tab_gameset_{{gameset.id}}" id="lnk_gameset_{{gameset.id}}">{{gameset.category}}</a></li>
+              {% endfor %}
+            </ul>
+            <div class="tab-content">
+              <div id="tab_game" class="tab-pane fade in active">
+                {{game.name}} {% trans 'description'%}
+              </div>
+              {% for gameset in gamesets%}
+                <div id="tab_gameset_{{gameset.id}}" class="tab-pane fade">
+                  {% if gameset.playlist%}
+                  <table class="table">
+                  {% for p in gameset.playlist%}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                      <audio id="aud_{{p.song.id}}" controls >
+                          <source src="{{p.song.audio_file.url}}" type="audio/mpeg">
+                      </audio>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  </table>
+                  {%endif%}
+                </div>
+                {% endfor %}
+            </div>
             <br>
-            <table>
-            {% for gameset in gamesets%}
-                <tr><td>
-                {{gameset.category}}
-                <table>
-                <tr><td>{{gameset.playlist}}</td></tr>
-                <tr><td>&nbsp;</td></tr>
-                </table>
-                </td>
-                </tr>
-            {% endfor %}
-            </table>
+
+
           </div>
         </div>
-
-
 </div>
 
 {% endblock %}

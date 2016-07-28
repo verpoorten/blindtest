@@ -1,0 +1,2 @@
+msgid "description"
+msgstr "description"
