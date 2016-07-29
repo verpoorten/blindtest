@@ -13,5 +13,9 @@ urlpatterns = [
     url(r'^home/([0-9]+)/$', views.change_tab_home, name='change_tab_home'),
     url(r'^tab/([0-9]+)/$', views.change_tab, name='change_tab'),
     url(r'^scores/([0-9]+)/$', views.view_scores, name='view_scores'),
+    url(r'^encodings/([0-9]+)/$', views.results_encoding, name='results_encoding'),
+    url(r'^gameset/save/results/$', views.save_results, name='save_results'),
+
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

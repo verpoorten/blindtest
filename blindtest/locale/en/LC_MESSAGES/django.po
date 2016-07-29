@@ -9,3 +9,30 @@ msgstr "Save"
 
 msgid "view_results"
 msgstr "View results"
+
+msgid "encode_results"
+msgstr "Encode results"
+
+msgid "cancel"
+msgstr "Cancel"
+
+msgid "title"
+msgstr "Title"
+
+msgid "interpreter"
+msgstr "interpreter"
+
+msgid "ranking"
+msgstr "Ranking"
+
+msgid "name"
+msgstr "Name"
+
+msgid "team_name"
+msgstr "Team name"
+
+msgid "gameset_score"
+msgstr "Gameset scores"
+
+msgid "gameset"
+msgstr "Set"

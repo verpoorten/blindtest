@@ -9,3 +9,30 @@ msgstr "Valider"
 
 msgid "view_results"
 msgstr "Voir tous les resultats"
+
+msgid "encode_results"
+msgstr "Encoder résultats"
+
+msgid "cancel"
+msgstr "Annuler"
+
+msgid "title"
+msgstr "Titre"
+
+msgid "interpreter"
+msgstr "interprète"
+
+msgid "ranking"
+msgstr "Classement"
+
+msgid "name"
+msgstr "Nom"
+
+msgid "team_name"
+msgstr "Nom d'équipe"
+
+msgid "gameset_score"
+msgstr "Scores pour la manche"
+
+msgid "gameset"
+msgstr "Manche"

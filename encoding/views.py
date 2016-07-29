@@ -60,6 +60,25 @@ def view_scores(request, game_id):
     return render(request, 'score.html',
                         {"game": game, "total_results": get_total_results(game)})
 
+def results_encoding(request, a_gameset_id):
+    results = Result.find_by_gameset(a_gameset_id)
+    gameset = Gameset.find_by_id(a_gameset_id)
+    teams = Team.find_teams_by_game(gameset.game)
+    for tm in teams:
+        found = False
+        for r in results:
+            if r.team.id == tm.id:
+                found = True
+                break
+        if not found:
+            new_result = Result()
+            new_result.team = tm
+            new_result.score = 0
+            new_result.gameset = gameset
+            new_result.save()
+    results = Result.find_by_gameset(a_gameset_id)
+    return render(request, 'results.html', {"results": results})
+
 def get_total_results(game):
     gamesets = Gameset.find_by_game(game)
     tt =[]
@@ -79,6 +98,29 @@ def get_total_results(game):
     return sorted(tt, key=attrgetter('result'), reverse=True)
     # return tt.sort(key=operator.attrgetter("result"), reverse=False)
     # return tt
+
+def result_save(request):
+    print('result_save')
+    result_id = request.GET['res_id']
+    score = request.GET['result']
+    result= Result.find_by_id(result_id)
+    result.score = score
+    result.save()
+    return None
+
+def save_results(request):
+    gameset = None
+    for key, value in request.POST.items():
+        print(key, value)
+        if(key.startswith('result_id_')):
+            result_id = key.replace('result_id_', '')
+            result= Result.find_by_id(result_id)
+            result.score = int(value)
+            result.save()
+            if gameset is None:
+                gameset = result.gameset
+    return change_tab(request, gameset.id)
+
 
 class TeamFinalTotalResult:
     team = None

@@ -70,17 +70,25 @@
         var k = setInterval("pauseAud()", 500);
 
         function playAud() {
+          if(myaud){
             myaud.play();
+          }
+
         }
 
         function pauseAud() {
+          if(myaud){
+
             myaud.pause();
             alert('Audio Stop Successfully');
             clearInterval(k);
+          }
         }
         $(document).ready(function () {
 
         });
+
+
       </script>
       {% endblock %}
     </body>

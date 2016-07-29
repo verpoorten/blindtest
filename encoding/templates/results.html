@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+<div class ="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{result.team.name}}</div>
+        <div class="panel-body">
+          <form method="post" action="{% url 'save_results' %}">
+            {% csrf_token %}
+            <table class="table table-hover">
+            {% for result in results%}
+              <tr>
+                <td>{{result.team.name}}</td>
+                <td><input type="text"
+                           value="{{result.score}}"
+                           name="result_id_{{result.id}}"
+                           id="result_id_{{result.id}}"></td></tr>
+            {%endfor%}
+            </table>
+            <button type="submit" class="btn btn-primary" title="{% trans 'save'%}" >
+               <span class="glyphicon glyphicon-save" aria-hidden="true"></span> {% trans 'save'%}
+            </button>
+            <button type="cancel" class="btn btn-primary" title="{% trans 'cancel'%}" >
+               <span class="glyphicon glyphicon-cancel" aria-hidden="true"></span> {% trans 'cancel'%}
+            </button>
+          </form>
+        </div>
+</div>
+
+{% endblock %}

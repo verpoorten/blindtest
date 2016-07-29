@@ -37,6 +37,11 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def find_teams_by_game(a_game):
+        return Team.objects.filter(game=a_game)
+
+
 class Category(models.Model):
     label = models.CharField(max_length = 100, blank = False, null = False)
 
@@ -68,7 +73,7 @@ class Gameset(models.Model):
 
 
 class Result(models.Model):
-    score = models.IntegerField(default=0)
+    score = models.IntegerField( blank = True, null = True)
     gameset  = models.ForeignKey(Gameset, blank = False, null = False)
     team  = models.ForeignKey(Team, blank = False, null = False)
 
@@ -79,6 +84,11 @@ class Result(models.Model):
     @staticmethod
     def find_by_game(an_game):
         return Result.objects.filter(gameset__game=an_game)
+
+    @staticmethod
+    def find_by_gameset( a_gameset):
+        return Result.objects.filter(gameset=a_gameset)
+
     @staticmethod
     def find_by_team_gameset(a_team, a_gameset):
         return Result.objects.filter(team=a_team,gameset=a_gameset)
@@ -88,6 +98,7 @@ class Song(models.Model):
     title = models.CharField(max_length=255)
     audio_file = models.FileField(upload_to='songs/')
     play_time = models.IntegerField(default=5) # In seconds
+    description = models.CharField(max_length=255, blank = True, null = True)
 
     def __str__(self):
         return self.title
