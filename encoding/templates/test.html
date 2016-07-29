@@ -50,8 +50,10 @@
             {% block breadcrumb %}
             {% endblock %}
         <br/>
-        {% block content %}
-        {% endblock %}
+        <audio id="aud_1" controls class="audioDemo" preload="none" >
+            <source src="http://soundbible.com/grab.php?id=2135&type=mp3"
+            type="audio/mpeg">
+        </audio>
       </div>
 
       <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -65,20 +67,14 @@
       <script src="{% static "js/custom.js" %}"></script>
 
       {% block script %}
-      <script>
-      function start_music(id, duration_sec){
-        var duration_mi = (duration_sec * 1000) /2;
-
-        var player = document.getElementById('aud_'+id);
-          setTimeout(function(){
-              player.play();
-              setTimeout(function(){
-                  player.pause();
-                  player.currentTime = 0;
-              }, duration_mi);
-          }, duration_mi);
-        }
-
+<script>
+var audio = document.getElementById('aud_1');
+audio.src = "mp3/song.mp3";
+audio.addEventListener('play', function() {
+  alert('kk');
+    console.log("Playing " + audio.src + ", for: " + audio.duration + "seconds.");
+    audio.play();
+});
         </script>
       {% endblock %}
     </body>

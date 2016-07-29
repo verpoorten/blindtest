@@ -54,6 +54,9 @@
                       <th>{% trans 'interpreter'%}</th>
                       <th>{% trans 'title'%}</th>
                       <th>{% trans 'description'%}</th>
+                      <th></th>
+                      <th>{% trans 'duration'%}</th>
+                      <th>{% trans 'full_listening'%}</th>
                     </tr>
                     {% for p in gs.playlist%}
                     <tr>
@@ -62,14 +65,21 @@
                       <td>{{ p.song.title }}</td>
                       <td>{{ p.song.description | default_if_none:''}}</td>
                       <td>
-                        <audio id="aud_{{p.song.id}}" controls >
+                        <audio id="aud_{{p.song.id}}" controls class="audioDemo"
+                               preload="none" onclick="start_music({{p.song.id}},{{p.song.play_time}})">
                             <source src="{{p.song.audio_file.url}}"
                             type="audio/mpeg">
                         </audio>
-                        <input type="hidden"
-                               id="aud_time_{{p.song.id}}"
-                               value="{{p.song.time}}">
                       </td>
+                      <td>{{p.song.play_time}} sec.</td>
+                      <td>
+                        <audio controls class="audioDemo"
+                               preload="none" >
+                            <source src="{{p.song.audio_file.url}}"
+                            type="audio/mpeg">
+                        </audio>
+                      </td>
+
                     </tr>
                     {% endfor %}
                   </table>

@@ -4,7 +4,7 @@ from .models import *
 #
 admin.site.register(Category)
 admin.site.register(Game)
-admin.site.register(Gameset)
+admin.site.register(Gameset, GamesetAdmin)
 admin.site.register(Playlist)
 admin.site.register(Result)
 admin.site.register(Song)

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.contrib import admin
+
 
 class Game(models.Model):
     OPEN_STATUS = (
@@ -48,13 +50,21 @@ class Category(models.Model):
     def __str__(self):
         return self.label
 
+class GamesetAdmin(admin.ModelAdmin):
+    list_display = ('game','category')
+    search_fields = ['game','category']
+    list_filter = ('game','category')
 
 class Gameset(models.Model):
     game  = models.ForeignKey(Game)
     category  = models.ForeignKey(Category, blank = True, null = True)
 
     def __str__(self):
-        return self.game.name
+        ch = self.game.name
+        if self.category:
+            ch += " - " + self.category.label
+        return ch
+
     @staticmethod
     def find_by_id(a_gameset_id):
         return Gameset.objects.get(pk=a_gameset_id)

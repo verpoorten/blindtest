@@ -121,6 +121,8 @@ def save_results(request):
                 gameset = result.gameset
     return change_tab(request, gameset.id)
 
+def test(request):
+    return render(request, 'test.html', {})
 
 class TeamFinalTotalResult:
     team = None

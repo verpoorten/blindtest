@@ -1,5 +1,5 @@
 msgid "description"
-msgstr "description"
+msgstr "Description"
 
 msgid "not_encoded_yet"
 msgstr "Pas encodé"
@@ -36,3 +36,9 @@ msgstr "Scores pour la manche"
 
 msgid "gameset"
 msgstr "Manche"
+
+msgid "duration"
+msgstr "Durée d'écoute"
+
+msgid "full_listening"
+msgstr "Ecoute complète"
