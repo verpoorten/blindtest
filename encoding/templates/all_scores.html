@@ -1,0 +1,31 @@
+{% extends "layout_full_view.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+      <div class="">
+        <table class="table table-striped" style="font-size:xx-large;">
+          <tr>
+            <th>{% trans 'ranking'%}</th>
+            <th>{% trans 'team_name'%}</th>
+            <th>{% trans 'score'%}</th>
+          </tr>
+        {%for res in total_results %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{res.team.name}}</td>
+            <td>{{res.result}}</td>
+          </tr>
+
+        {%endfor%}
+       </table>
+       <a class="navbar-brand" href="{% url 'home' %}" title="Home">
+         <img src="{% static 'images/play-music.png' %}" style="margin-top: -10px;">
+       </a>
+      </div>
+
+
+      <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+      <script src="{% static "js/bootstrap.min.js" %}"></script>
+      <script src="{% static "js/custom.js" %}"></script>
+{% endblock %}

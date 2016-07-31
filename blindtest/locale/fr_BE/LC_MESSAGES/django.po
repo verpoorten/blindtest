@@ -42,3 +42,18 @@ msgstr "Durée d'écoute"
 
 msgid "full_listening"
 msgstr "Ecoute complète"
+
+msgid "score"
+msgstr "Score"
+
+msgid "scores"
+msgstr "Scores"
+
+msgid "view_all_scores"
+msgstr "Voir le classement en plein écran"
+
+msgid "return"
+msgstr "Retour"
+
+msgid "view_all_gameset_scores"
+msgstr "Voir le classement de la manche en plein écran"

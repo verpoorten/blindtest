@@ -16,3 +16,7 @@ body {
 .erreur_formulaire{
   color:red;
 }
+
+#full_view {
+  padding-top: 0px;
+}

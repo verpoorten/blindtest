@@ -42,3 +42,18 @@ msgstr "Duration"
 
 msgid "full_listening"
 msgstr "Full listening"
+
+msgid "score"
+msgstr "Score"
+
+msgid "scores"
+msgstr "Scores"
+
+msgid "view_all_scores"
+msgstr "To view the ranking, on full screen"
+
+msgid "return"
+msgstr "Return"
+
+msgid "view_all_gameset_scores"
+msgstr "To view the gameset ranking, on full screen"

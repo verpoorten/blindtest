@@ -52,7 +52,10 @@ def change_tab(request, gameset_id):
     game = gameset.game
     gamesets = Gameset.find_by_game(game)
     return render(request, 'home.html',
-                        {"game": game, "gamesets": gamesets, "gameset":gameset, "total_results": get_total_results(game)})
+                        {"game": game,
+                         "gamesets": gamesets,
+                         "gameset":gameset,
+                         "total_results": get_total_results(game)})
 
 def view_scores(request, game_id):
     game = Game.find_by_id(game_id)
@@ -121,8 +124,29 @@ def save_results(request):
                 gameset = result.gameset
     return change_tab(request, gameset.id)
 
-def test(request):
-    return render(request, 'test.html', {})
+def display_player_all(request, game_id):
+    game = Game.find_by_id(game_id)
+    return render(request, 'all_scores.html', {"total_results": get_total_results(game), "game": game})
+
+def results_view(request, a_gameset_id):
+    results = Result.find_by_gameset(a_gameset_id)
+    gameset = Gameset.find_by_id(a_gameset_id)
+    teams = Team.find_teams_by_game(gameset.game)
+    for tm in teams:
+        found = False
+        for r in results:
+            if r.team.id == tm.id:
+                found = True
+                break
+        if not found:
+            new_result = Result()
+            new_result.team = tm
+            new_result.score = 0
+            new_result.gameset = gameset
+            new_result.save()
+    results = Result.find_by_gameset(a_gameset_id)
+    return render(request, 'results_full.html', {"results": results,
+                                                 "gameset": gameset})
 
 class TeamFinalTotalResult:
     team = None

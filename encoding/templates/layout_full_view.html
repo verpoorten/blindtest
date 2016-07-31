@@ -21,50 +21,22 @@
           body { font-family: 'Armata', sans-serif; }
         </style>
     </head>
-    <body>
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
+    <body id="full_view">
 
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/play-music.png' %}" style="margin-top: -10px;"></a>
-
-          </div>
-
-        </div>
-      </nav>
       <div class="container">
+
         {% block content %}
         {% endblock %}
       </div>
 
-      <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
 
-        </div>
-        <br>
-      </nav>
 
       <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
       <script src="{% static "js/bootstrap.min.js" %}"></script>
       <script src="{% static "js/custom.js" %}"></script>
 
       {% block script %}
-      <script>
-      function start_music(id, duration_sec){
-        var duration_mi = (duration_sec * 1000) /2;
 
-        var player = document.getElementById('aud_'+id);
-          setTimeout(function(){
-              player.play();
-              setTimeout(function(){
-                  player.pause();
-                  player.currentTime = 0;
-              }, duration_mi);
-          }, duration_mi);
-        }
-
-        </script>
       {% endblock %}
     </body>
 </html>
