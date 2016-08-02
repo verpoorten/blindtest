@@ -103,21 +103,22 @@ def results_encoding(request, a_gameset_id):
     results = Result.find_by_gameset(a_gameset_id)
     return render(request, 'results.html', {"results": results})
 
-def get_total_results(game):
+def get_total_results(game=None):
     gamesets = Gameset.find_by_game(game)
     tt =[]
-    for team in game.teams:
-        tot = 0
-        for gs in gamesets:
-            results = Result.find_by_team_gameset(team, gs)
-            for result in results:
-                if result.score:
-                    tot = tot + result.score
-        team_total = TeamFinalTotalResult()
-        team_total.team = team
-        team_total.result = tot
+    if game:
+        for team in game.teams:
+            tot = 0
+            for gs in gamesets:
+                results = Result.find_by_team_gameset(team, gs)
+                for result in results:
+                    if result.score:
+                        tot = tot + result.score
+            team_total = TeamFinalTotalResult()
+            team_total.team = team
+            team_total.result = tot
 
-        tt.append(team_total)
+            tt.append(team_total)
 
     return sorted(tt, key=attrgetter('result'), reverse=True)
     # return tt.sort(key=operator.attrgetter("result"), reverse=False)

@@ -31,7 +31,7 @@
                    id="gameset_active_id">
             <ul class="nav nav-tabs">
               <li class="{%if gameset %}{%else%}active{%endif%}"
-                  id="lnk_home"><a id="lnk_gameset_{{gameset.id}}" href="{% url 'change_tab_home' game.id %}">{{game.name}}</a></li>
+                  id="lnk_home"><a id="lnk_gameset_{{gameset.id}}" href="{%if game%}{% url 'change_tab_home' game.id %}{%else%}#{%endif%}">{{game.name}}</a></li>
               {% for gs in gamesets%}
               <li class="{% if gameset.id == gs.id %}active{%endif%}" id="lnk_gameset_{{gs.id}}">
                 <a href="{% url 'change_tab' gs.id%}"
@@ -45,27 +45,32 @@
                 {% if game.description %}
                 {{game.description | default_if_none:''}}
                 {% endif %}
-                <br>
-                <table class="table table-striped">
-                  <tr>
-                    <th>{% trans 'ranking'%}</th>
-                    <th>{% trans 'team_name'%}</th>
-                    <th>{% trans 'score'%}</th>
-                  </tr>
-                {%for res in total_results %}
+                {%if game%}
+                  <br>
+                  <table class="table table-striped">
+                    <tr>
+                      <th>{% trans 'ranking'%}</th>
+                      <th>{% trans 'team_name'%}</th>
+                      <th>{% trans 'score'%}</th>
+                    </tr>
+                  {%for res in total_results %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{res.team.name}}</td>
+                      <td>{{res.result}}</td>
 
-                  <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{res.team.name}}</td>
-                    <td>{{res.result}}</td>
+                    </tr>
 
-                  </tr>
-
-                {%endfor%}
-               </table>
+                  {%endfor%}
+                 </table>
+               {%endif%}
+               {%if game%}
                <a href="{% url 'display_player_all' game.id %}"
                   class="btn btn-default"
                   title="{% trans 'view_all_scores'%}">{% trans 'scores' %}</a>
+               {%else%}
+               <h2>{% trans 'no_game_open'%}</h2>
+               {%endif%}
               </div>
               {% for gs in gamesets%}
                 <div id="tab_gameset_{{gameset.id}}"
