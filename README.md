@@ -10,7 +10,7 @@ First, clone the project:
     $ mkdir projects
     $ cd projects
     $ git clone https://github.com/verpoorten/blindtest.git
-    $ cd immobilier
+    $ cd blindtest
 
 ### Creating a virtual environment
 
@@ -37,7 +37,7 @@ Installing:
 Creating:
 
     $ virtualenv --python=python3.4 venv
-    $ chmod +x immovenv/bin/activate
+    $ chmod +x venv/bin/activate
 
 Running:
 
@@ -55,7 +55,7 @@ Running:
 
 ### Installing Django
 
-    (venv) $ pip install django
+    (venv) $ pip install django==1.9.8
 
 ### Starting the app
     
