@@ -79,3 +79,9 @@ msgstr "Voir le classement de la manche en plein écran"
 
 msgid "no_game_open"
 msgstr "Pas de jeu ouvert"
+
+msgid "answers"
+msgstr "Réponses"
+
+msgid "view_all_answers"
+msgstr "Voir toutes les réponses"

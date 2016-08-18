@@ -71,10 +71,12 @@ class Category(models.Model):
     def __str__(self):
         return self.label
 
+
 class GamesetAdmin(admin.ModelAdmin):
     list_display = ('game','category')
     search_fields = ['game','category']
     list_filter = ('game','category')
+
 
 class Gameset(models.Model):
     game  = models.ForeignKey(Game)
@@ -124,6 +126,7 @@ class Result(models.Model):
     def find_by_team_gameset(a_team, a_gameset):
         return Result.objects.filter(team=a_team,gameset=a_gameset)
 
+
 class Song(models.Model):
     interpreter = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
@@ -133,6 +136,7 @@ class Song(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Playlist(models.Model):
     gameset  = models.ForeignKey(Gameset)

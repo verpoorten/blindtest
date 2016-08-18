@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^gameset/save/results/$', views.save_results, name='save_results'),
     url(r'^play_display/all/([0-9]+)/$', views.display_player_all, name="display_player_all"),
     url(r'^play_display/gameset/([0-9]+)/$', views.results_view, name="results_view"),
+    url(r'^answers_display/gameset/([0-9]+)/$', views.answers_view, name="answers_view"),
 
 
 

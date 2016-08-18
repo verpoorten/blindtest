@@ -79,3 +79,10 @@ msgstr "To view the gameset ranking, on full screen"
 
 msgid "no_game_open"
 msgstr "No game opened"
+
+msgid "answers"
+msgstr "Answers"
+
+msgid "view_all_answers"
+msgstr "View all answers"
+

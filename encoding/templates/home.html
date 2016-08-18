@@ -138,6 +138,9 @@
                   <a href="{% url 'results_view' gs.id %}"
                      class="btn btn-default"
                      title="{% trans 'view_all_scores'%}">{% trans 'scores' %}</a>
+                   <a href="{% url 'answers_view' gs.id %}"
+                     class="btn btn-default"
+                     title="{% trans 'view_all_answers'%}">{% trans 'answers' %}</a>
                 </div>
                 {% endfor %}
             </div>

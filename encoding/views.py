@@ -170,6 +170,14 @@ def results_view(request, a_gameset_id):
     return render(request, 'results_full.html', {"results": results,
                                                  "gameset": gameset})
 
+
+def answers_view(request, a_gameset_id):
+    gameset = Gameset.find_by_id(a_gameset_id)
+
+    results = Result.find_by_gameset(a_gameset_id)
+    return render(request, 'answers_full.html', { "gameset": gameset})
+
+
 class TeamFinalTotalResult:
     team = None
     result = 0
