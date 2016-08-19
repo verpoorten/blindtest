@@ -79,9 +79,9 @@
                   <table class="table table-striped">
                     <tr>
                       <th>N°</th>
-                      <th>{% trans 'interpreter'%}</th>
+                     <!-- <th>{% trans 'interpreter'%}</th>
                       <th>{% trans 'title'%}</th>
-                      <th>{% trans 'description'%}</th>
+                      <th>{% trans 'description'%}</th>-->
                       <th></th>
                       <th>{% trans 'duration'%}</th>
                       <th>{% trans 'full_listening'%}</th>
@@ -89,9 +89,9 @@
                     {% for p in gs.playlist%}
                     <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ p.song.interpreter }}</td>
+                      <!--<td>{{ p.song.interpreter }}</td>
                       <td>{{ p.song.title }}</td>
-                      <td>{{ p.song.description | default_if_none:''}}</td>
+                      <td>{{ p.song.description | default_if_none:''}}</td>-->
                       <td>
                         <audio id="aud_{{p.song.id}}" controls class="audioDemo"
                                preload="none" onclick="start_music({{p.song.id}},{{p.song.play_time}})">

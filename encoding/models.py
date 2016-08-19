@@ -30,8 +30,8 @@ class Game(models.Model):
         ('CLOSE', _('close')),
         ('OPEN', _('open'))
     )
-    name = models.CharField(max_length = 100,blank = False, null = False)
-    description = models.TextField(blank = True, null = True)
+    name = models.CharField(max_length=100, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
     open_status = models.CharField(max_length=20, choices=OPEN_STATUS, default='CLOSE', blank=False, null=False)
 
     def __str__(self):
@@ -54,8 +54,8 @@ class Game(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length = 100, blank = False, null = False)
-    game  = models.ForeignKey(Game, blank = False, null = False)
+    name = models.CharField(max_length=100, blank=False, null=False)
+    game  = models.ForeignKey(Game, blank=False, null=False)
 
     def __str__(self):
         return self.name
@@ -66,7 +66,7 @@ class Team(models.Model):
 
 
 class Category(models.Model):
-    label = models.CharField(max_length = 100, blank = False, null = False)
+    label = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
         return self.label
@@ -79,8 +79,8 @@ class GamesetAdmin(admin.ModelAdmin):
 
 
 class Gameset(models.Model):
-    game  = models.ForeignKey(Game)
-    category  = models.ForeignKey(Category, blank = True, null = True)
+    game = models.ForeignKey(Game)
+    category = models.ForeignKey(Category, blank=True, null=True)
 
     def __str__(self):
         ch = self.game.name
@@ -106,9 +106,9 @@ class Gameset(models.Model):
 
 
 class Result(models.Model):
-    score = models.IntegerField( blank = True, null = True)
-    gameset  = models.ForeignKey(Gameset, blank = False, null = False)
-    team  = models.ForeignKey(Team, blank = False, null = False)
+    score = models.IntegerField( blank=True, null=True)
+    gameset  = models.ForeignKey(Gameset, blank=False, null=False)
+    team  = models.ForeignKey(Team, blank=False, null=False)
 
     @staticmethod
     def find_by_id(an_id):
@@ -127,20 +127,28 @@ class Result(models.Model):
         return Result.objects.filter(team=a_team,gameset=a_gameset)
 
 
+class Style(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Song(models.Model):
     interpreter = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     audio_file = models.FileField(upload_to='songs/')
-    play_time = models.IntegerField(default=5) # In seconds
-    description = models.CharField(max_length=255, blank = True, null = True)
+    play_time = models.IntegerField(default=10)  # In seconds
+    description = models.CharField(max_length=255, blank=True, null=True)
+    style = models.ForeignKey(Style, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
 
 class Playlist(models.Model):
-    gameset  = models.ForeignKey(Gameset)
-    song  = models.ForeignKey(Song, blank = False, null = False)
+    gameset = models.ForeignKey(Gameset)
+    song = models.ForeignKey(Song, blank=False, null=False)
 
     def __str__(self):
         if self.song:

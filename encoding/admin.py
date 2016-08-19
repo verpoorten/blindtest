@@ -27,17 +27,19 @@ admin.site.register(Category)
 admin.site.register(Game)
 admin.site.register(Gameset, GamesetAdmin)
 
+
 class PlaylistAdmin(admin.ModelAdmin):
-    list_display = ('gameset','song')
+    list_display = ('gameset', 'song')
 
 admin.site.register(Playlist, PlaylistAdmin)
 admin.site.register(Result)
 
 
 class SongAdmin(admin.ModelAdmin):
-    search_fields = ['interpreter','title']
-    list_filter = ('interpreter','title',)
-    list_display = ('interpreter','title')
+    search_fields = ['interpreter', 'title']
+    list_filter = ('style',)
+    list_display = ('interpreter', 'title', 'style')
 
 admin.site.register(Song, SongAdmin)
+admin.site.register(Style)
 admin.site.register(Team)
